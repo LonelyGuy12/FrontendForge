@@ -2,17 +2,20 @@ import { useCallback, useRef } from 'react';
 import { useAIStore } from '@/stores/aiStore';
 import { useEditorStore } from '@/stores/editorStore';
 import { useFileStore } from '@/stores/fileStore';
+import { useEnvStore } from '@/stores/envStore';
 
 const API_URL = import.meta.env.VITE_API_URL || '/api/v1';
 
-const SYSTEM_PROMPT =
-  'You are AsiPilot AI, an expert frontend development assistant. You help with HTML, CSS, JavaScript, TypeScript, React, Vue, Svelte, Next.js, and more.\n' +
-  'CRITICAL INSTRUCTION: When you provide code that should be applied to a file, you MUST start the code block with a markdown bolded filename, followed immediately by the fenced code block. Example:\n' +
-  '**`src/App.tsx`**\n' +
-  '```tsx\n' +
-  'export default function App() { ... }\n' +
-  '```\n' +
-  'Do not omit the bolded filename. Provide exact, complete code drop-ins when requested to fix or change code.';
+const getSystemPrompt = (envType: string | null) => {
+  const lang = envType === 'python' ? 'Python 3' : envType === 'java' ? 'Java (JDK 17)' : 'HTML, CSS, JavaScript, TypeScript, React, and web technologies';
+  return `You are AsiPilot AI, an expert development assistant. You help with ${lang}.
+CRITICAL INSTRUCTION: When you provide code that should be applied to a file, you MUST start the code block with a markdown bolded filename, followed immediately by the fenced code block. Example:
+**\`src/App.tsx\`**
+\`\`\`tsx
+export default function App() { ... }
+\`\`\`
+Do not omit the bolded filename. Provide exact, complete code drop-ins when requested to fix or change code.`;
+};
 
 export function useASI1Chat() {
   const { addMessage, updateStreamingMessage, finishStreaming, setIsStreaming, isStreaming } =
@@ -36,6 +39,7 @@ export function useASI1Chat() {
         // Build the dynamic workspace context from the stores
         const editorStore = useEditorStore.getState();
         const fileStore = useFileStore.getState();
+        const envStore = useEnvStore.getState();
         
         // Merge the base files with the unsaved editor changes
         const currentFiles = { ...fileStore.files };
@@ -43,7 +47,7 @@ export function useASI1Chat() {
           currentFiles[path] = typeof file === 'string' ? file : file.content;
         }
 
-        let dynamicSystemPrompt = SYSTEM_PROMPT + '\n\n--- CURRENT WORKSPACE FILES ---\n';
+        let dynamicSystemPrompt = getSystemPrompt(envStore.environment) + '\n\n--- CURRENT WORKSPACE FILES ---\n';
         for (const [path, content] of Object.entries(currentFiles)) {
           // Guess language for markdown
           const ext = path.split('.').pop() || 'text';
@@ -125,6 +129,8 @@ export function useASI1Chat() {
               editorStore.updateContent(filename, code);
             } else if (fileStore.files[filename] !== undefined) {
               fileStore.updateFile(filename, code);
+            } else {
+              fileStore.createFile(filename, code);
             }
           }
         }
