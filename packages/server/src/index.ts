@@ -42,7 +42,7 @@ setupWebSocketHandlers(io);
 
 // Start server
 httpServer.listen(config.PORT, () => {
-  logger.info(`🚀 FrontendForge server running on port ${config.PORT}`);
+  logger.info(`🚀 AsiPilot server running on port ${config.PORT}`);
   logger.info(`   Environment: ${config.NODE_ENV}`);
   logger.info(`   Client URL: ${config.CLIENT_URL}`);
 });

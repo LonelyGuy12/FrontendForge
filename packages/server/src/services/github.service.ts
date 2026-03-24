@@ -1,5 +1,5 @@
 import { Octokit } from '@octokit/rest';
-import { FileNode, FileChange, EXCLUDED_DIRECTORIES, FRONTEND_EXTENSIONS } from '@frontendforge/shared';
+import { FileNode, FileChange, EXCLUDED_DIRECTORIES, FRONTEND_EXTENSIONS } from '@asipilot/shared';
 import { config } from '../config/env.js';
 import { logger } from '../utils/logger.js';
 import { getLanguageFromPath, isBinaryFile } from '../utils/file-utils.js';
@@ -136,7 +136,7 @@ class GitHubService {
     });
 
     // Create branch
-    const branchName = `frontendforge/fix-${Date.now()}`;
+    const branchName = `asipilot/fix-${Date.now()}`;
     await this.octokit.git.createRef({
       owner, repo, ref: `refs/heads/${branchName}`, sha: commit.sha,
     });

@@ -1,7 +1,7 @@
 import { Router, Request, Response } from 'express';
 import { orchestrator } from '../agents/orchestrator.js';
 import { analyzeLimiter } from '../middleware/rate-limit.middleware.js';
-import type { AgentType } from '@frontendforge/shared';
+import type { AgentType } from '@asipilot/shared';
 
 const router = Router();
 

@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Shield, Zap, Paintbrush, FileText, ChevronDown, ChevronUp } from 'lucide-react';
 import { useEditorStore } from '@/stores/editorStore';
 import { cn } from '@/lib/utils';
-import type { Finding, Severity } from '@frontendforge/shared';
+import type { Finding, Severity } from '@asipilot/shared';
 import { useState } from 'react';
 
 const agentIcons: Record<string, typeof Shield> = {

@@ -3,7 +3,7 @@ import {
   AgentType, AgentResult, AgentProgressEvent, Finding, FullReviewResult,
   QuickReviewResult, PRFixSet, FileChange, AgentOptions,
   SEVERITY_ORDER, estimateTokens, ALL_AGENTS,
-} from '@frontendforge/shared';
+} from '@asipilot/shared';
 import { SecurityAgent } from './security.agent.js';
 import { PerformanceAgent } from './performance.agent.js';
 import { StyleAgent } from './style.agent.js';
@@ -176,10 +176,10 @@ Respond with valid JSON:
     const parsed = JSON.parse(response.choices[0]?.message?.content || '{}');
 
     return {
-      branchName: `frontendforge/fix-${Date.now()}`,
+      branchName: `asipilot/fix-${Date.now()}`,
       commitMessage: parsed.commitMessage || 'fix: apply code review fixes',
-      prTitle: parsed.prTitle || 'FrontendForge: Code Review Fixes',
-      prBody: parsed.prBody || 'Automated fixes from FrontendForge code review.',
+      prTitle: parsed.prTitle || 'AsiPilot: Code Review Fixes',
+      prBody: parsed.prBody || 'Automated fixes from AsiPilot code review.',
       fileChanges: parsed.fileChanges || [],
     };
   }

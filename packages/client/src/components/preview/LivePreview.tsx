@@ -29,6 +29,16 @@ export default function LivePreview() {
 
   const viewport = viewports[viewportIndex];
 
+  const handleOpenInNewTab = () => {
+    const newWindow = window.open('', '_blank');
+    if (newWindow) {
+      newWindow.document.open();
+      newWindow.document.write(srcdoc);
+      newWindow.document.close();
+      newWindow.document.title = 'AsiPilot Preview';
+    }
+  };
+
   return (
     <div className="flex flex-col h-full bg-background">
       {/* Toolbar */}
@@ -40,6 +50,14 @@ export default function LivePreview() {
         >
           <RefreshCw className="w-3.5 h-3.5 text-muted-foreground" />
         </button>
+        <button
+          onClick={handleOpenInNewTab}
+          className="p-1.5 hover:bg-secondary rounded transition-colors"
+          title="Open in new tab"
+        >
+          <ExternalLink className="w-3.5 h-3.5 text-muted-foreground" />
+        </button>
+        <div className="w-px h-4 bg-border mx-1" />
         {viewports.map((vp, i) => (
           <button
             key={vp.label}

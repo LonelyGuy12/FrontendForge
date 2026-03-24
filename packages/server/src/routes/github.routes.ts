@@ -44,7 +44,7 @@ router.post('/pr', defaultLimiter, async (req: Request, res: Response) => {
     }
 
     const prUrl = await github.createPR(
-      owner, repo, baseBranch || 'main', changes, title || 'FrontendForge Fixes', body || ''
+      owner, repo, baseBranch || 'main', changes, title || 'AsiPilot Fixes', body || ''
     );
 
     res.json({ success: true, data: { prUrl } });

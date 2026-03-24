@@ -3,7 +3,7 @@ import crypto from 'crypto';
 import { asi1 } from '../services/asi1-client.js';
 import { cache } from '../services/cache.service.js';
 import { completionLimiter } from '../middleware/rate-limit.middleware.js';
-import { CACHE_TTL } from '@frontendforge/shared';
+import { CACHE_TTL } from '@asipilot/shared';
 
 const router = Router();
 

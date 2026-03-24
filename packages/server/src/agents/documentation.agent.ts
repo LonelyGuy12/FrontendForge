@@ -1,4 +1,4 @@
-import { AgentResult, AgentOptions, AgentType, DocMode } from '@frontendforge/shared';
+import { AgentResult, AgentOptions, AgentType, DocMode } from '@asipilot/shared';
 import { BaseAgent } from './base.agent.js';
 import { parseJSONSafe } from '../utils/code-parser.js';
 

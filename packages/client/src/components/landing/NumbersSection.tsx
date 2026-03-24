@@ -25,7 +25,7 @@ export default function NumbersSection() {
         </p>
         <p className="text-primary text-lg font-medium mt-2">Lines of code reviewed</p>
         <p className="text-hero-sub max-w-md mx-auto mt-4">
-          Every day, FrontendForge's AI agents analyze thousands of files to keep codebases secure and performant.
+          Every day, AsiPilot's AI agents analyze thousands of files to keep codebases secure and performant.
         </p>
 
         <div className="mt-24">

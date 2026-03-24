@@ -1,5 +1,5 @@
 import crypto from 'crypto';
-import { AgentResult, AgentOptions, Finding, AgentSummary, AgentType, estimateTokens } from '@frontendforge/shared';
+import { AgentResult, AgentOptions, Finding, AgentSummary, AgentType, estimateTokens } from '@asipilot/shared';
 import { ASI1Client, asi1 } from '../services/asi1-client.js';
 import { cache, CacheService } from '../services/cache.service.js';
 import { logger } from '../utils/logger.js';

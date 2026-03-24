@@ -36,7 +36,7 @@ export default function TerminalPanel() {
     terminal.open(containerRef.current);
     fitAddon.fit();
 
-    terminal.writeln('\x1b[1;32m✦ FrontendForge Terminal\x1b[0m');
+    terminal.writeln('\x1b[1;32m✦ AsiPilot Terminal\x1b[0m');
     terminal.writeln('\x1b[90mConnected to local environment.\x1b[0m');
     terminal.writeln('');
     terminal.write('\x1b[32m❯\x1b[0m ');
@@ -49,7 +49,6 @@ export default function TerminalPanel() {
         terminal.writeln('');
         if (currentLine.trim()) {
           terminal.writeln(`\x1b[90m$ ${currentLine}\x1b[0m`);
-          terminal.writeln(`\x1b[33mNote:\x1b[0m Terminal commands run through the server WebSocket. Connect the server to enable command execution.`);
         }
         currentLine = '';
         terminal.write('\x1b[32m❯\x1b[0m ');

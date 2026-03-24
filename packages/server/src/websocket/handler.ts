@@ -3,7 +3,7 @@ import { WS_EVENTS } from './events.js';
 import { asi1 } from '../services/asi1-client.js';
 import { orchestrator } from '../agents/orchestrator.js';
 import { logger } from '../utils/logger.js';
-import type { WSCompletionRequest, WSReviewRequest, WSChatMessage, AgentType } from '@frontendforge/shared';
+import type { WSCompletionRequest, WSReviewRequest, WSChatMessage, AgentType } from '@asipilot/shared';
 
 const activeAbortControllers = new Map<string, AbortController>();
 
@@ -74,7 +74,7 @@ export function setupWebSocketHandlers(io: SocketServer) {
         const messages = [
           {
             role: 'system' as const,
-            content: 'You are FrontendForge AI, an expert frontend development assistant. You help with HTML, CSS, JavaScript, TypeScript, React, Vue, Svelte, Next.js, Tailwind CSS, and all frontend technologies. Provide clear, concise, and accurate code with explanations. When showing code, use appropriate language tags in code blocks.',
+            content: 'You are AsiPilot AI, an expert frontend development assistant. You help with HTML, CSS, JavaScript, TypeScript, React, Vue, Svelte, Next.js, Tailwind CSS, and all frontend technologies. Provide clear, concise, and accurate code with explanations. When showing code, use appropriate language tags in code blocks.',
           },
           ...data.history,
           { role: 'user' as const, content: data.message },

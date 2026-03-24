@@ -1,4 +1,4 @@
-import { estimateTokens } from '@frontendforge/shared';
+import { estimateTokens } from '@asipilot/shared';
 import { logger } from './logger.js';
 
 /**

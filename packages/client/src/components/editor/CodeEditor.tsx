@@ -24,7 +24,7 @@ export default function CodeEditor({ filePath, language }: CodeEditorProps) {
     editorRef.current = editor;
 
     // Define custom theme
-    monaco.editor.defineTheme('frontendforge-dark', {
+    monaco.editor.defineTheme('asipilot-dark', {
       base: 'vs-dark',
       inherit: true,
       rules: [
@@ -50,7 +50,7 @@ export default function CodeEditor({ filePath, language }: CodeEditorProps) {
         'scrollbarSlider.hoverBackground': '#3a3a4a80',
       },
     });
-    monaco.editor.setTheme('frontendforge-dark');
+    monaco.editor.setTheme('asipilot-dark');
 
     // Track cursor position
     editor.onDidChangeCursorPosition((e: any) => {
@@ -97,7 +97,7 @@ export default function CodeEditor({ filePath, language }: CodeEditorProps) {
       value={content}
       onChange={handleChange}
       onMount={handleMount}
-      theme="frontendforge-dark"
+      theme="asipilot-dark"
       options={{
         fontSize,
         tabSize,

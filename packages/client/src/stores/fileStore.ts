@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import type { FileNode } from '@frontendforge/shared';
+import type { FileNode } from '@asipilot/shared';
 
 const DEFAULT_FILES: Record<string, string> = {
   'index.html': `<!DOCTYPE html>
@@ -12,7 +12,7 @@ const DEFAULT_FILES: Record<string, string> = {
 </head>
 <body>
   <div id="app">
-    <h1>Hello, FrontendForge!</h1>
+    <h1>Hello, AsiPilot!</h1>
     <p>Start editing to see changes in the live preview.</p>
   </div>
   <script src="script.js"></script>
@@ -51,18 +51,18 @@ p {
   color: #a0a0a0;
   font-size: 1.1rem;
 }`,
-  'script.js': `// Welcome to FrontendForge!
-console.log("Hello from FrontendForge!");
+  'script.js': `// Welcome to AsiPilot!
+console.log("Hello from AsiPilot!");
 
 document.addEventListener('DOMContentLoaded', () => {
   const app = document.getElementById('app');
   const btn = document.createElement('button');
   btn.textContent = 'Click me';
   btn.style.cssText = 'margin-top:1.5rem;padding:0.75rem 2rem;background:#81f084;color:#000;border:none;border-radius:8px;font-size:1rem;cursor:pointer;font-weight:600';
-  btn.addEventListener('click', () => alert('FrontendForge is working!'));
+  btn.addEventListener('click', () => alert('AsiPilot is working!'));
   app?.appendChild(btn);
 });`,
-  'README.md': `# My Project\n\nBuilt with FrontendForge — the AI-powered browser IDE.\n`,
+  'README.md': `# My Project\n\nBuilt with AsiPilot — the AI-powered browser IDE.\n`,
 };
 
 interface FileStore {

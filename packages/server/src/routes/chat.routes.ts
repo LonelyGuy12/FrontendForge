@@ -1,7 +1,7 @@
 import { Router, Request, Response } from 'express';
 import { asi1 } from '../services/asi1-client.js';
 import { defaultLimiter } from '../middleware/rate-limit.middleware.js';
-import type { ASI1Message, ChatRequest } from '@frontendforge/shared';
+import type { ASI1Message, ChatRequest } from '@asipilot/shared';
 
 const router = Router();
 
@@ -16,7 +16,7 @@ router.post('/', defaultLimiter, async (req: Request, res: Response) => {
     const messages: ASI1Message[] = [
       {
         role: 'system',
-        content: 'You are FrontendForge AI, an expert frontend development assistant. You help with HTML, CSS, JavaScript, TypeScript, React, Vue, Svelte, Next.js, Tailwind CSS, and all frontend technologies. Provide clear, concise, and accurate code with explanations. When showing code, use appropriate language tags in code blocks.',
+        content: 'You are AsiPilot AI, an expert frontend development assistant. You help with HTML, CSS, JavaScript, TypeScript, React, Vue, Svelte, Next.js, Tailwind CSS, and all frontend technologies. Provide clear, concise, and accurate code with explanations. When showing code, use appropriate language tags in code blocks.',
       },
       ...history,
       { role: 'user', content: message },

@@ -11,7 +11,7 @@ export default function Navbar() {
           <div className="w-7 h-7 rounded-lg bg-gradient-to-b from-secondary to-muted flex items-center justify-center">
             <Terminal className="w-4 h-4 text-primary" />
           </div>
-          <span className="text-xl font-semibold tracking-tight text-foreground">FrontendForge</span>
+          <span className="text-xl font-semibold tracking-tight text-foreground">AsiPilot</span>
         </Link>
 
         {/* Nav Items */}

@@ -1,4 +1,4 @@
-import { AgentResult, AgentOptions, AgentType } from '@frontendforge/shared';
+import { AgentResult, AgentOptions, AgentType } from '@asipilot/shared';
 import { BaseAgent } from './base.agent.js';
 
 export class SecurityAgent extends BaseAgent {

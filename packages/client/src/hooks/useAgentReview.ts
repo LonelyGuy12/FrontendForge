@@ -2,7 +2,7 @@ import { useCallback, useState } from 'react';
 import { useWebSocket } from './useWebSocket';
 import { useAIStore } from '@/stores/aiStore';
 import { useFileStore } from '@/stores/fileStore';
-import type { AgentType, AgentProgressEvent, FullReviewResult } from '@frontendforge/shared';
+import type { AgentType, AgentProgressEvent, FullReviewResult } from '@asipilot/shared';
 
 export function useAgentReview() {
   const { socket } = useWebSocket();

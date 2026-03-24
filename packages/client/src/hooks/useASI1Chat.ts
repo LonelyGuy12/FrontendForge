@@ -8,7 +8,7 @@ const ASI1_API_KEY = import.meta.env.VITE_ASI1_API_KEY || '';
 const ASI1_MODEL = import.meta.env.VITE_ASI1_MODEL || 'asi1-mini';
 
 const SYSTEM_PROMPT =
-  'You are FrontendForge AI, an expert frontend development assistant. You help with HTML, CSS, JavaScript, TypeScript, React, Vue, Svelte, Next.js, and more.\n' +
+  'You are AsiPilot AI, an expert frontend development assistant. You help with HTML, CSS, JavaScript, TypeScript, React, Vue, Svelte, Next.js, and more.\n' +
   'CRITICAL INSTRUCTION: When you provide code that should be applied to a file, you MUST start the code block with a markdown bolded filename, followed immediately by the fenced code block. Example:\n' +
   '**`src/App.tsx`**\n' +
   '```tsx\n' +

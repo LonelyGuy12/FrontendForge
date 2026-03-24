@@ -1,5 +1,5 @@
 import axios, { AxiosInstance, AxiosError } from 'axios';
-import { ASI1Message, ASI1Response, ASI1StreamResponse, ASI1_DEFAULTS } from '@frontendforge/shared';
+import { ASI1Message, ASI1Response, ASI1StreamResponse, ASI1_DEFAULTS } from '@asipilot/shared';
 import { config } from '../config/env.js';
 import { logger } from '../utils/logger.js';
 import { stripCodeFences } from '../utils/code-parser.js';

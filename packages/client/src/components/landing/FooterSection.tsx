@@ -18,7 +18,7 @@ export default function FooterSection() {
               <div className="w-7 h-7 rounded-lg bg-gradient-to-b from-secondary to-muted flex items-center justify-center">
                 <Terminal className="w-4 h-4 text-primary" />
               </div>
-              <span className="text-xl font-semibold tracking-tight">FrontendForge</span>
+              <span className="text-xl font-semibold tracking-tight">AsiPilot</span>
             </Link>
             <p className="text-muted-foreground text-sm mt-4 max-w-xs">
               AI-powered browser IDE for frontend developers. Build, review, and ship with confidence.
@@ -44,7 +44,7 @@ export default function FooterSection() {
 
         {/* Bottom Bar */}
         <div className="border-t border-border/30 mt-12 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p className="text-sm text-muted-foreground">© 2025 FrontendForge</p>
+          <p className="text-sm text-muted-foreground">© 2025 AsiPilot</p>
           <div className="flex gap-6">
             {['Privacy', 'Terms', 'Cookies'].map((item) => (
               <a key={item} href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">

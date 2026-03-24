@@ -19,7 +19,7 @@ export default function TopBar({ layout, onLayoutChange }: TopBarProps) {
         <button className="p-1.5 hover:bg-secondary rounded text-muted-foreground">
           <Menu className="w-4 h-4" />
         </button>
-        <span className="text-sm font-medium text-foreground ml-1">FrontendForge</span>
+        <span className="text-sm font-medium text-foreground ml-1">AsiPilot</span>
 
         <div className="flex-1" />
 

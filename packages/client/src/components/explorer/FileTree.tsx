@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { ChevronRight, ChevronDown, File, Folder, FolderOpen } from 'lucide-react';
-import type { FileNode } from '@frontendforge/shared';
+import type { FileNode } from '@asipilot/shared';
 import { useEditorStore } from '@/stores/editorStore';
 import { useFileStore } from '@/stores/fileStore';
-import { getLanguageFromPath } from '@frontendforge/shared';
+import { getLanguageFromPath } from '@asipilot/shared';
 import { cn } from '@/lib/utils';
 
 const FILE_ICONS: Record<string, string> = {

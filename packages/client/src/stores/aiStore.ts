@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import type { ChatMessage, AgentResult, Finding, AgentType } from '@frontendforge/shared';
+import type { ChatMessage, AgentResult, Finding, AgentType } from '@asipilot/shared';
 
 interface AIState {
   messages: ChatMessage[];

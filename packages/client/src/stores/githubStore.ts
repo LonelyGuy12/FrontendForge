@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import type { FileNode } from '@frontendforge/shared';
+import type { FileNode } from '@asipilot/shared';
 
 interface GitHubState {
   owner: string;

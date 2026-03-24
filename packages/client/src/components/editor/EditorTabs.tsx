@@ -1,7 +1,7 @@
 import { X } from 'lucide-react';
 import { useEditorStore } from '@/stores/editorStore';
 import { cn } from '@/lib/utils';
-import { getFileName } from '@frontendforge/shared';
+import { getFileName } from '@asipilot/shared';
 
 export default function EditorTabs() {
   const openFiles = useEditorStore((s) => s.openFiles);

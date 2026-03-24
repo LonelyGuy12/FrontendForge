@@ -1,5 +1,5 @@
 {
-  "name": "@frontendforge/server",
+  "name": "@asipilot/server",
   "version": "1.0.0",
   "private": true,
   "type": "module",
@@ -10,7 +10,7 @@
     "start": "node dist/index.js"
   },
   "dependencies": {
-    "@frontendforge/shared": "*",
+    "@asipilot/shared": "*",
     "@octokit/rest": "^20.0.0",
     "axios": "^1.6.0",
     "cors": "^2.8.5",

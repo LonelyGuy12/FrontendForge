@@ -15,7 +15,7 @@ export default function CTASection() {
         </p>
         <div className="flex justify-center gap-4 mt-8">
           <Link to="/ide">
-            <Button variant="hero">Launch FrontendForge</Button>
+            <Button variant="hero">Launch AsiPilot</Button>
           </Link>
           <Button variant="heroSecondary">View on GitHub</Button>
         </div>

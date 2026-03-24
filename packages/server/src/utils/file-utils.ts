@@ -1,4 +1,4 @@
-import { getLanguageFromPath, isBinaryFile, getFileExtension, getFileName } from '@frontendforge/shared';
+import { getLanguageFromPath, isBinaryFile, getFileExtension, getFileName } from '@asipilot/shared';
 
 export { getLanguageFromPath, isBinaryFile, getFileExtension, getFileName };
 

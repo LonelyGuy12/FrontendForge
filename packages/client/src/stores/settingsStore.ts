@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import type { UserSettings } from '@frontendforge/shared';
+import type { UserSettings } from '@asipilot/shared';
 
 interface SettingsState extends UserSettings {
   updateSetting: <K extends keyof UserSettings>(key: K, value: UserSettings[K]) => void;
