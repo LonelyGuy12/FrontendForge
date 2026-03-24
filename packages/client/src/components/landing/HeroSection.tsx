@@ -2,16 +2,6 @@ import { Link } from 'react-router-dom';
 import { ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Navbar from './Navbar';
-import MarqueeRow from './MarqueeRow';
-
-const brands = [
-  { name: 'Vercel', initial: 'V' },
-  { name: 'Netlify', initial: 'N' },
-  { name: 'Supabase', initial: 'S' },
-  { name: 'Prisma', initial: 'P' },
-  { name: 'Stripe', initial: 'S' },
-  { name: 'Linear', initial: 'L' },
-];
 
 export default function HeroSection() {
   return (
@@ -71,17 +61,6 @@ export default function HeroSection() {
               <Button variant="hero">Launch IDE</Button>
             </Link>
             <Button variant="heroSecondary">Watch Demo</Button>
-          </div>
-        </div>
-
-        {/* Social Proof Bar */}
-        <div className="flex items-center justify-between px-8 pb-8">
-          <div className="hidden sm:block">
-            <p className="text-foreground/50 text-sm">Trusted by developers</p>
-            <p className="text-foreground/50 text-sm">at leading companies</p>
-          </div>
-          <div className="flex-1 ml-8 overflow-hidden">
-            <MarqueeRow brands={brands} />
           </div>
         </div>
       </div>
