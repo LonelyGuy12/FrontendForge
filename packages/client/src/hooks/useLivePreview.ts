@@ -10,7 +10,7 @@ export function useLivePreview() {
   const files = useMemo(() => {
     const merged = { ...baseFiles };
     for (const [path, file] of Object.entries(openFiles)) {
-      merged[path] = file.content;
+      merged[path] = typeof file === 'string' ? file : file.content;
     }
     return merged;
   }, [baseFiles, openFiles]);

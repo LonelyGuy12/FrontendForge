@@ -6,6 +6,8 @@ import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
+import { MarkdownMessage } from './MarkdownMessage';
+
 export default function AIChatPanel() {
   const { sendMessage, stopGeneration, isStreaming } = useASI1Chat();
   const messages = useAIStore((s) => s.messages);
@@ -65,28 +67,28 @@ export default function AIChatPanel() {
           <div
             key={msg.id}
             className={cn(
-              'max-w-[90%] text-sm',
-              msg.role === 'user' ? 'ml-auto' : 'mr-auto'
+              'max-w-[100%] text-sm',
+              msg.role === 'user' ? 'ml-auto' : 'mr-auto w-full'
             )}
           >
             <div
               className={cn(
-                'px-4 py-3 rounded-2xl whitespace-pre-wrap break-words',
+                'px-4 py-3 rounded-2xl',
                 msg.role === 'user'
-                  ? 'bg-primary/10 rounded-br-md'
-                  : 'liquid-glass rounded-bl-md'
+                  ? 'bg-primary/10 rounded-br-md whitespace-pre-wrap break-words max-w-[90%] float-right'
+                  : 'liquid-glass rounded-bl-md w-full'
               )}
             >
-              {msg.content}
+              {msg.role === 'user' ? msg.content : <MarkdownMessage content={msg.content} />}
             </div>
+            <div className="clear-both"></div>
           </div>
         ))}
 
         {streamingMessage && (
-          <div className="mr-auto max-w-[90%] text-sm">
-            <div className="liquid-glass px-4 py-3 rounded-2xl rounded-bl-md whitespace-pre-wrap">
-              {streamingMessage}
-              <span className="animate-pulse">▌</span>
+          <div className="mr-auto w-full text-sm">
+            <div className="liquid-glass px-4 py-3 rounded-2xl rounded-bl-md">
+              <MarkdownMessage content={streamingMessage + '▌'} />
             </div>
           </div>
         )}

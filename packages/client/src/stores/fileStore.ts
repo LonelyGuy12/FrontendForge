@@ -113,8 +113,10 @@ export const useFileStore = create<FileStore>((set, get) => ({
     if (saved) {
       try {
         const parsed = JSON.parse(saved);
-        set({ files: parsed.files, fileTree: buildTreeFromPaths(Object.keys(parsed.files)), initialized: true });
-        return;
+        if (parsed.files && Object.keys(parsed.files).length > 0) {
+          set({ files: parsed.files, fileTree: buildTreeFromPaths(Object.keys(parsed.files)), initialized: true });
+          return;
+        }
       } catch { /* fallback */ }
     }
     // Use default files
