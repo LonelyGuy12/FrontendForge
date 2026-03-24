@@ -3,6 +3,7 @@ import { useAIStore } from '@/stores/aiStore';
 import { useEditorStore } from '@/stores/editorStore';
 import { useFileStore } from '@/stores/fileStore';
 import { useEnvStore } from '@/stores/envStore';
+import { parseMarkdown, MarkdownSegment } from '@/utils/markdownParser';
 
 const API_URL = import.meta.env.VITE_API_URL || '/api/v1';
 
@@ -116,14 +117,13 @@ export function useASI1Chat() {
 
         // Lovable-style Auto-Apply logic:
         // Parse the full completion string for markdown code blocks + filenames
-        const regex = /(?:\*\*\`?([^\`\n]+)\`?\*\*\s*\n)?```(\w*)\n([\s\S]*?)```/g;
-        let match;
+        const segments = parseMarkdown(fullContent);
         
-        while ((match = regex.exec(fullContent)) !== null) {
-          const filename = match[1];
-          const code = match[3].trim();
-          
-          if (filename) {
+        for (const segment of segments) {
+          if (segment.type === 'code' && segment.filename && segment.code) {
+            const filename = segment.filename;
+            const code = segment.code;
+            
             // Apply it! 
             if (editorStore.openFiles[filename]) {
               editorStore.updateContent(filename, code);

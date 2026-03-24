@@ -1,45 +1,12 @@
 import { Check } from 'lucide-react';
+import { parseMarkdown } from '@/utils/markdownParser';
 
 interface MarkdownMessageProps {
   content: string;
 }
 
 export function MarkdownMessage({ content }: MarkdownMessageProps) {
-  // Parse the message into text segments and code blocks
-  // Parse the message into text segments and code blocks
-  // Looking for: **`filename`** (or similar) followed by ```lang ... ```
-  const segments: Array<{ type: 'text' | 'code'; content?: string; filename?: string | null; language?: string; code?: string }> = [];
-  const regex = /(?:\*\*\`?([^\`\n]+)\`?\*\*\s*\n)?```(\w*)\n([\s\S]*?)```/g;
-  
-  let lastIndex = 0;
-  let match;
-
-  while ((match = regex.exec(content)) !== null) {
-    // Add preceding text
-    if (match.index > lastIndex) {
-      segments.push({
-        type: 'text',
-        content: content.slice(lastIndex, match.index),
-      });
-    }
-
-    segments.push({
-      type: 'code',
-      filename: match[1] || null,
-      language: match[2] || 'text',
-      code: match[3].trim(),
-    });
-
-    lastIndex = regex.lastIndex;
-  }
-
-  // Add remaining text
-  if (lastIndex < content.length) {
-    segments.push({
-      type: 'text',
-      content: content.slice(lastIndex),
-    });
-  }
+  const segments = parseMarkdown(content);
 
   return (
     <div className="space-y-3">
