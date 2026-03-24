@@ -25,8 +25,8 @@ function required(key: string): string {
 
 export const config: EnvConfig = {
   NODE_ENV: process.env.NODE_ENV || 'development',
-  PORT: parseInt(process.env.PORT || (process.env.NODE_ENV === 'production' ? '7860' : '3001'), 10),
-  CLIENT_URL: process.env.CLIENT_URL || (process.env.NODE_ENV === 'production' ? 'http://localhost:7860' : 'http://localhost:5173'),
+  PORT: process.env.NODE_ENV === 'production' ? 7860 : parseInt(process.env.PORT || '3001', 10),
+  CLIENT_URL: process.env.NODE_ENV === 'production' ? 'http://localhost:7860' : (process.env.CLIENT_URL || 'http://localhost:5173'),
   ASI1_API_KEY: required('ASI1_API_KEY'),
   ASI1_BASE_URL: process.env.ASI1_BASE_URL || 'https://api.asi1.ai/v1',
   ASI1_MODEL: process.env.ASI1_MODEL || 'asi1-mini',
