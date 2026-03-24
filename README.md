@@ -1,3 +1,11 @@
+---
+title: AsiPilot
+emoji: 🚀
+colorFrom: blue
+colorTo: green
+sdk: docker
+pinned: false
+---
 # AsiPilot
 
 A browser-based IDE exclusively for frontend and web development, powered by ASI-1 Mini AI with multi-agent code review.
