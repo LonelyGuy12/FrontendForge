@@ -3,9 +3,7 @@ import { useAIStore } from '@/stores/aiStore';
 import { useEditorStore } from '@/stores/editorStore';
 import { useFileStore } from '@/stores/fileStore';
 
-const ASI1_BASE_URL = import.meta.env.VITE_ASI1_BASE_URL || 'https://api.asi1.ai/v1';
-const ASI1_API_KEY = import.meta.env.VITE_ASI1_API_KEY || '';
-const ASI1_MODEL = import.meta.env.VITE_ASI1_MODEL || 'asi1-mini';
+const API_URL = import.meta.env.VITE_API_URL || '/api/v1';
 
 const SYSTEM_PROMPT =
   'You are AsiPilot AI, an expert frontend development assistant. You help with HTML, CSS, JavaScript, TypeScript, React, Vue, Svelte, Next.js, and more.\n' +
@@ -55,14 +53,12 @@ export function useASI1Chat() {
           dynamicSystemPrompt += `**\`${path}\`**\n\`\`\`${lang}\n${content}\n\`\`\`\n\n`;
         }
 
-        const response = await fetch(`${ASI1_BASE_URL}/chat/completions`, {
+        const response = await fetch(`${API_URL}/chat`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${ASI1_API_KEY}`,
           },
           body: JSON.stringify({
-            model: ASI1_MODEL,
             messages: [
               { role: 'system', content: dynamicSystemPrompt },
               ...history,
