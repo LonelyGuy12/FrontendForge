@@ -1,3 +1,13 @@
+---
+title: AsiPilot
+emoji: 🚀
+colorFrom: blue
+colorTo: purple
+sdk: docker
+pinned: false
+license: mit
+---
+
 # AsiPilot
 
 AsiPilot is an AI-native, browser-based IDE built around ASI-1. It combines code editing, AI chat, code completion, multi-agent review, terminal execution, and GitHub workflows in a single application.
