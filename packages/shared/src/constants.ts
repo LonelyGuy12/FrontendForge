@@ -27,9 +27,11 @@ export const WS_EVENTS = {
 
   // Execution
   EXECUTE_REQUEST: 'execute:request',
+  EXECUTE_STARTED: 'execute:started',
   EXECUTE_TOKEN: 'execute:token',
   EXECUTE_COMPLETE: 'execute:complete',
   EXECUTE_ERROR: 'execute:error',
+  EXECUTE_INPUT: 'execute:input',
 
   // Chat
   CHAT_MESSAGE: 'chat:message',

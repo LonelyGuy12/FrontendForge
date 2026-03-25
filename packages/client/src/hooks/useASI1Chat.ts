@@ -138,7 +138,10 @@ export function useASI1Chat() {
         finishStreaming(fullContent);
       } catch (error) {
         if ((error as Error).name !== 'AbortError') {
-          finishStreaming('Sorry, an error occurred. Please try again.');
+          const msg = (error as Error).message || 'Unknown error';
+          finishStreaming(
+            `Sorry, something went wrong.\n\n${msg.length > 400 ? `${msg.slice(0, 400)}…` : msg}`
+          );
           console.error('[useASI1Chat]', error);
         } else {
           // User stopped — commit whatever was streamed so far

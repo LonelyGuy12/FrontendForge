@@ -57,6 +57,19 @@ if (config.NODE_ENV === 'production') {
 // WebSocket
 setupWebSocketHandlers(io);
 
+httpServer.on('error', (err: NodeJS.ErrnoException) => {
+  if (err.code === 'EADDRINUSE') {
+    logger.error(
+      `Port ${config.PORT} is already in use (another AsiPilot server or app is listening). ` +
+        `Stop that process, or set a different PORT in .env (e.g. PORT=3002). ` +
+        `Find PID: lsof -nP -iTCP:${config.PORT} -sTCP:LISTEN`
+    );
+  } else {
+    logger.error('HTTP server failed to start', err);
+  }
+  process.exit(1);
+});
+
 // Start server
 httpServer.listen(config.PORT, () => {
   logger.info(`🚀 AsiPilot server running on port ${config.PORT}`);

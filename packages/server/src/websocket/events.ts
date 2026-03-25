@@ -12,7 +12,9 @@ export const WS_EVENTS = {
   CHAT_STOP: 'chat:stop',
   CHAT_ERROR: 'chat:error',
   EXECUTE_REQUEST: 'execute:request',
+  EXECUTE_STARTED: 'execute:started',
   EXECUTE_TOKEN: 'execute:token',
   EXECUTE_COMPLETE: 'execute:complete',
   EXECUTE_ERROR: 'execute:error',
+  EXECUTE_INPUT: 'execute:input',
 } as const;

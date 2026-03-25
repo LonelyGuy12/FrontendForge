@@ -3,15 +3,17 @@ import { WS_EVENTS } from './events.js';
 import { asi1 } from '../services/asi1-client.js';
 import { orchestrator } from '../agents/orchestrator.js';
 import { logger } from '../utils/logger.js';
-import { handleCodeExecution } from './execution.js';
+import { handleCodeExecution, sendProcessInput, cancelGraceKill, scheduleGraceKill } from './execution.js';
+import { getStableSessionId } from './session-id.js';
 import type { WSCompletionRequest, WSReviewRequest, WSChatMessage, AgentType, WSExecuteRequest } from '@asipilot/shared';
 
 const activeAbortControllers = new Map<string, AbortController>();
 
 export function setupWebSocketHandlers(io: SocketServer) {
   io.on('connection', (socket: Socket) => {
-    const sessionId = (socket.handshake.query.sessionId as string) || socket.id;
+    const sessionId = getStableSessionId(socket);
     socket.join(sessionId);
+    cancelGraceKill(sessionId);
     logger.info(`WebSocket connected: ${socket.id} (session: ${sessionId})`);
 
     // Code completion
@@ -66,10 +68,22 @@ export function setupWebSocketHandlers(io: SocketServer) {
       }
     });
 
-    // Code execution
+    // Code execution (use stable sessionId so stdin/output stay matched after socket.io reconnects)
     socket.on(WS_EVENTS.EXECUTE_REQUEST, async (data: WSExecuteRequest) => {
-      await handleCodeExecution(socket, data);
+      await handleCodeExecution(io, sessionId, data);
     });
+
+    socket.on(
+      WS_EVENTS.EXECUTE_INPUT,
+      (data: { runId: string; input: string }, ack?: (r: { ok: boolean }) => void) => {
+        logger.debug(`EXECUTE_INPUT run ${data.runId}: ${JSON.stringify(data.input)}`);
+        const success = sendProcessInput(data.runId, data.input);
+        if (typeof ack === 'function') ack({ ok: success });
+        if (!success) {
+          logger.warn(`Failed stdin for runId ${data.runId}`);
+        }
+      }
+    );
 
     // Chat with streaming
     socket.on(WS_EVENTS.CHAT_MESSAGE, async (data: WSChatMessage) => {
@@ -114,7 +128,10 @@ export function setupWebSocketHandlers(io: SocketServer) {
       const controller = activeAbortControllers.get(socket.id);
       if (controller) controller.abort();
       activeAbortControllers.delete(socket.id);
-      logger.info(`WebSocket disconnected: ${socket.id}`);
+
+      scheduleGraceKill(sessionId);
+
+      logger.info(`WebSocket disconnected: ${socket.id} (session: ${sessionId})`);
     });
   });
 }

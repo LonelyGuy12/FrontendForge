@@ -25,22 +25,45 @@ router.post('/', defaultLimiter, async (req: Request, res: Response) => {
     }
 
     if (stream) {
-      res.setHeader('Content-Type', 'text/event-stream');
-      res.setHeader('Cache-Control', 'no-cache');
-      res.setHeader('Connection', 'keep-alive');
-
+      // Do not set SSE headers until the upstream stream is ready; if ASI-1 fails first,
+      // we must return JSON 500 — otherwise the client gets a broken SSE body and shows a generic error.
       const generator = asi1.chatStream(chatMessages);
-      for await (const token of generator) {
-        res.write(`data: ${JSON.stringify({ choices: [{ delta: { content: token } }] })}\n\n`);
+      try {
+        for await (const token of generator) {
+          if (!res.headersSent) {
+            res.setHeader('Content-Type', 'text/event-stream');
+            res.setHeader('Cache-Control', 'no-cache');
+            res.setHeader('Connection', 'keep-alive');
+          }
+          res.write(`data: ${JSON.stringify({ choices: [{ delta: { content: token } }] })}\n\n`);
+        }
+        if (!res.headersSent) {
+          res.setHeader('Content-Type', 'text/event-stream');
+          res.setHeader('Cache-Control', 'no-cache');
+          res.setHeader('Connection', 'keep-alive');
+        }
+        res.write('data: [DONE]\n\n');
+        res.end();
+      } catch (streamErr) {
+        if (!res.headersSent) {
+          res.status(500).json({
+            success: false,
+            error: { code: 'CHAT_ERROR', message: (streamErr as Error).message },
+          });
+        } else {
+          res.end();
+        }
       }
-      res.write('data: [DONE]\n\n');
-      res.end();
     } else {
       const response = await asi1.chat(chatMessages);
       res.json({ success: true, data: response });
     }
   } catch (error) {
-    res.status(500).json({ success: false, error: { code: 'CHAT_ERROR', message: (error as Error).message } });
+    if (!res.headersSent) {
+      res.status(500).json({ success: false, error: { code: 'CHAT_ERROR', message: (error as Error).message } });
+    } else {
+      res.end();
+    }
   }
 });
 
